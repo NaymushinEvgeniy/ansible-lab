@@ -1,6 +1,7 @@
 ---
 - host: all
   become: true
+  tasks:
     - name: Upgrade all packages
       ansible.builtin.yum:
         name: '*'
