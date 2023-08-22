@@ -6,3 +6,4 @@
       ansible.builtin.yum:
         name: '*'
         state: latest
+        disablerepo: "Postgres*"
