@@ -1,0 +1,10 @@
+- name: user
+  hosts: demo
+  vars:
+    user: neycode
+  tasks:
+    - name: Create user
+      user:
+        name: "{{ user }}"
+        state: present
+      become: true

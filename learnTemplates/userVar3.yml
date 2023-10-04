@@ -1,0 +1,10 @@
+- name: user
+  hosts: demo
+  vars_files:
+    - ./garbage/my_vars.yml
+  tasks:
+    - name: Create user
+      user:
+        name: "{{ user }}"
+        state: present
+      become: true
