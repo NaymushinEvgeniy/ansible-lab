@@ -1,0 +1,30 @@
+- name: user
+  hosts: demo
+  tasks:
+    - name: Preconfig
+      block:
+        - name: Create user
+          user:
+            name: "{{ user }}"
+            state: present
+          register: error
+        - name: Curl install
+          yum:
+            name: curl
+            update_cache: yes
+          register: error
+        - name: Failed
+          command: echo "FAILED"
+          register: failed_err
+          failed_when: "'FAILED' in failed_err.stdout"
+          ignore_errors: true
+      become: true
+      when: ansible_facts['distribution'] == 'CentOS'
+      rescue:
+        - name: Some error print
+          debug:
+            var: error
+      always:
+        - name: debug
+          debug:
+            msg: "Rebooooting"
